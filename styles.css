@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Micro+5&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
+
 html, body {
-    
-    height: 100%;           
+    height: 100%;
+    width: 100%;     
     margin: 0;  
     display: flex;           
     justify-content: center; 
@@ -10,11 +13,17 @@ html, body {
 
 .container {
     display: flex;
+    flex-direction: column;
+    gap: 2em;
+    height: 800px ;
+    
+    
+}
+.sketch-box {
+    display: flex;
     flex-wrap: wrap;
     width: 600px; 
     height: 600px; 
-    justify-content: center;
-    align-items: center;
     border: 1px solid black; 
     background-color: white;
 }
@@ -23,16 +32,33 @@ html, body {
     width: calc(100% / 16); 
     height: calc(100% / 16);
     box-sizing: border-box; 
-    border: 1px solid lightgray; 
-}
-
-.grid-square.hovered {
+    border: 1px solid lightgray;
     background-color: black;
+    opacity: 0;
+    transition: 0.2s;
 }
 
-#change-grid-btn {
-    margin: 160px;
+#change-grid-btn, #random-button {
+    width: 170px;
+    height: 50px;
     padding: 10px;
-    align-self: flex-start;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Kumbh Sans", sans-serif;
+    font-size: large;
+}
+  
+.modifications {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 2em;
+
+}
+
+h1 {
+    color: white;
+    font-size: 3em;
+    
 }

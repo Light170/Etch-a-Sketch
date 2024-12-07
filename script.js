@@ -1,13 +1,33 @@
-const container = document.querySelector('.container');
 
-for (let i = 0; i < 16 * 16; i++) {
-    const square = document.createElement('div');
-    square.classList.add('grid-square');
-    container.appendChild(square);
 
-    square.addEventListener('mouseenter', function() {
-        square.classList.add('hovered');
-    });
+
+const sketchBox = document.querySelector('.sketch-box');
+let isRandomOn = false;
+
+createGrid(16);
+
+function createGrid(squaresPerSide) {
+    sketchBox.replaceChildren();
+
+    for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
+        const square = document.createElement('div');
+        square.classList.add('grid-square');
+        square.style.width = `calc(100% / ${squaresPerSide})`;
+        square.style.height = `calc(100% / ${squaresPerSide})`;
+        sketchBox.appendChild(square);
+
+        square.addEventListener('mouseenter', function() {
+            if (isRandomOn) {
+                square.style.opacity = 1;
+                square.style.backgroundColor = generateRandomColor(); 
+            } else {
+                let currentOpacity = parseFloat(square.style.opacity) || 0;
+                if (currentOpacity < 1) {
+                    square.style.opacity = currentOpacity + 0.1;
+                }
+            }
+        });
+    }
 }
 
 const changeGridBtn = document.getElementById("change-grid-btn");
@@ -25,18 +45,24 @@ changeGridBtn.addEventListener('click', function() {
     createGrid(squaresPerSide);
 });
 
-function createGrid(squaresPerSide) {
-    container.replaceChildren();
-
-    for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
-        const square = document.createElement('div');
-        square.classList.add('grid-square');
-        square.style.width = `calc(100% / ${squaresPerSide})`;
-        square.style.height = `calc(100% / ${squaresPerSide})`;
-        container.appendChild(square);
-
-        square.addEventListener('mouseenter', function() {
-            square.classList.add('hovered');
-        });
+const randomButton = document.querySelector("#random-button");
+randomButton.addEventListener("click", event => {
+    isRandomOn = !isRandomOn;
+    if (isRandomOn) {
+        event.target.style.backgroundColor = "#464646";
+        event.target.style.color = "#ffffff";
+        event.target.style.fontWeight = "bold";
+    } else {
+        event.target.style.backgroundColor = "#ffffff";
+        event.target.style.color = "#000000";
+        event.target.style.fontWeight = "normal";
     }
+});
+
+
+function generateRandomColor() {
+    const red = Math.floor(Math.random() * 256);   
+    const green = Math.floor(Math.random() * 256); 
+    const blue = Math.floor(Math.random() * 256);  
+    return `rgb(${red}, ${green}, ${blue})`;       
 }
