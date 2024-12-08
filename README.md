@@ -1,5 +1,5 @@
 <p>
-  This <strong>Odin Project Foundation Course project</strong> focuses on creating an <strong>Etch-a-Sketch</strong>, emulating a pixel-art experience with a <strong>16x16 grid</strong> of square <code>div</code> elements.
+  This project, part of <strong>The Odin Project's Foundation Course curriculum</strong>, focuses on creating an <strong>Etch-a-Sketch</strong>, emulating a pixel-art experience with a <strong>16x16 grid</strong> of square <code>div</code> elements.
 </p>
 
 <h3>Features</h3>
