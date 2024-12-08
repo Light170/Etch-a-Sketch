@@ -14,19 +14,26 @@ function createGrid(squaresPerSide) {
         square.classList.add('grid-square');
         square.style.width = `calc(100% / ${squaresPerSide})`;
         square.style.height = `calc(100% / ${squaresPerSide})`;
+        square.setAttribute('data-opacity', 0);
         sketchBox.appendChild(square);
 
         square.addEventListener('mouseenter', function() {
-            if (isRandomOn) {
-                square.style.opacity = 1;
-                square.style.backgroundColor = generateRandomColor(); 
-            } else {
-                let currentOpacity = parseFloat(square.style.opacity) || 0;
-                if (currentOpacity < 1) {
-                    square.style.opacity = currentOpacity + 0.1;
-                }
+            let currentOpacity = parseFloat(square.getAttribute('data-opacity'));
+            let color;
+
+            if (currentOpacity < 1) {
+                currentOpacity += 0.1;
+                square.setAttribute('data-opacity', currentOpacity);
             }
-        });
+
+            if (isRandomOn) {
+                color = generateRandomColor().replace('rgb', 'rgba').replace(')', `, ${currentOpacity})`); 
+            } else {
+                color = `rgba(0, 0, 0, ${currentOpacity})`;
+            }
+            
+            square.style.backgroundColor = color
+        });             
     }
 }
 
